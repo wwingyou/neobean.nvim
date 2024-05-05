@@ -11,6 +11,7 @@ return {
 			map_key("<leader>fg", builtin.live_grep)
 			map_key("<leader>fb", builtin.buffers)
 			map_key("<leader>fh", builtin.help_tags)
+			map_key("<leader>fr", builtin.oldfiles)
 		end,
 	},
 	{
