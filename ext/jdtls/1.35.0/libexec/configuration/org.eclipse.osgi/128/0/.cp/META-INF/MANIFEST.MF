@@ -1,0 +1,71 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.5.2
+Build-Jdk-Spec: 17
+Automatic-Module-Name: org.eclipse.jdt.junit4.runtime
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-SymbolicName: org.eclipse.jdt.junit4.runtime;singleton:=true
+Bundle-Version: 1.3.0.v20220609-1843
+Bundle-Localization: plugin
+Export-Package: org.eclipse.jdt.internal.junit4.runner;x-internal:=true
+Require-Bundle: org.junit;bundle-version="4.7.0",org.eclipse.jdt.junit.r
+ untime;bundle-version="[3.5.0,4.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Eclipse-SourceReferences: scm:git:https://github.com/eclipse-jdt/eclipse
+ .jdt.ui.git;path="org.eclipse.jdt.junit4.runtime";tag="I20220610-0130";
+ commitId=5956df286fb0df506b6c7906d788d7e6f37dd73b
+
+Name: about.html
+SHA-256-Digest: 7mbS+ztMDS7S5/aYvJ7U49bPd/pcr0CtAylhJdsaxfA=
+
+Name: org/eclipse/jdt/internal/junit4/runner/JUnit4TestListener.class
+SHA-256-Digest: pITBSZrM86jtJ3+lf144F/xGWvC/VjainPRcRccnszQ=
+
+Name: .api_description
+SHA-256-Digest: aqRsO3QvuihnwMwxPD0Br+XXeJlWh6jaQTiFRCzmPZQ=
+
+Name: org/eclipse/jdt/internal/junit4/runner/SubForestFilter.class
+SHA-256-Digest: iCkwcwEWeBKcVr5gT2TDbi8bV97Dj1Il6pG7TAnCzCU=
+
+Name: org/eclipse/jdt/internal/junit4/runner/DescriptionMatcher.class
+SHA-256-Digest: 57Xp/++oJ1/e63N2QI4cREevLPvxboRh4bIgytWvJNU=
+
+Name: org/eclipse/jdt/internal/junit4/runner/JUnit4TestListener$Assumpti
+ onFailedTestIdentifier.class
+SHA-256-Digest: P5j0gL1yp5SH37vrJCY9Oim394egyaxJ9a/BFGw4CWc=
+
+Name: org/eclipse/jdt/internal/junit4/runner/JUnit4TestReference.class
+SHA-256-Digest: PHQLfQkljQ+MUAN8iZxZnaWs14b45ZxQMqRQlV85eQ4=
+
+Name: org/eclipse/jdt/internal/junit4/runner/JUnit4TestListener$IgnoredT
+ estIdentifier.class
+SHA-256-Digest: Z+n1RRsWjkQb+PMFGRiUlXnPbfnqPdOSMXR6/Ew+YLo=
+
+Name: org/eclipse/jdt/internal/junit4/runner/DescriptionMatcher$LeadingI
+ dentifierMatcher.class
+SHA-256-Digest: QnyX4HMufBd2uB2uhocFHhM+GSCxqKIO1f9a4zWHbC4=
+
+Name: org/eclipse/jdt/internal/junit4/runner/FailuresFirstSorter.class
+SHA-256-Digest: GiQVNitO513rUweyz5wJlnfNMe4xEu5weBRyj22CtyY=
+
+Name: org/eclipse/jdt/internal/junit4/runner/JUnit4Identifier.class
+SHA-256-Digest: d5gPp3OrV75B894MhKWG66SuME7s7hgskVe+7I8Siv8=
+
+Name: plugin.properties
+SHA-256-Digest: xnLp0tluE9P2U8D0gqySdduR99kEOEbR/akWALfdHVQ=
+
+Name: org/eclipse/jdt/internal/junit4/runner/JUnit4TestReference$1.class
+SHA-256-Digest: eakmcqPXRPvcvFn/wp4AkJITDLmBGLYwLM+XPlw2HXk=
+
+Name: org/eclipse/jdt/internal/junit4/runner/JUnit4TestLoader.class
+SHA-256-Digest: aW7TvL3iOxySXg2W24FtY68nXpl3OQK5Y2GcX0YSBeQ=
+
+Name: org/eclipse/jdt/internal/junit4/runner/DescriptionMatcher$Composit
+ eMatcher.class
+SHA-256-Digest: C8j1ijInTzJ2C8kTH1DK8zzdNtVCZJ0IjyC60nfKk7k=
+
+Name: org/eclipse/jdt/internal/junit4/runner/DescriptionMatcher$ExactMat
+ cher.class
+SHA-256-Digest: qMOI9chy81Yg/foQNhS7ApYs7DHKAToGzqGe1hTfQoA=
+
