@@ -34,3 +34,7 @@ vim.keymap.set("n", "<F5>", function()
 	vim.cmd([[JdtUpdateDebugConfig]])
 	require("dap").continue()
 end, { desc = "debuger continue (overriden for java)" })
+
+vim.opt.tabstop = 4 -- 탭 하나의 너비
+vim.opt.shiftwidth = 4 -- 들여쓰기의 너비
+vim.opt.softtabstop = 4 -- 에디팅 중 탭을 누르면 추가되는 공간의 개수

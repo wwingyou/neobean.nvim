@@ -19,7 +19,7 @@ return {
 		vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
 		map_key("<leader>;", ":ToggleTerm<cr>")
-		map_key("<leader>1", ":1ToggleTerm<cr>a")
-		map_key("<leader>2", ":2ToggleTerm<cr>a")
+		map_key("<leader>1", ":1ToggleTerm<cr>")
+		map_key("<leader>2", ":2ToggleTerm<cr>")
 	end,
 }
