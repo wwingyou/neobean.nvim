@@ -13,7 +13,7 @@ return {
 				visible = true,
 				hide_dotfiles = false,
 				hide_gitgnored = false,
-				hide_hidden = false,
+				hide_hidden = true,
 			},
 		},
 	},
