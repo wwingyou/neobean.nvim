@@ -3,6 +3,7 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		local configs = require("nvim-treesitter.configs")
+		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 		local languages = {
 			"lua",
@@ -25,6 +26,11 @@ return {
 			sync_install = false,
 			highlight = { enable = true },
 			indent = { enable = true },
+			autotag = {
+				enable = true,
+			},
 		})
+
+		parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
 	end,
 }
