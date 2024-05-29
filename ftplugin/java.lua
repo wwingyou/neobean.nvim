@@ -1,22 +1,141 @@
-local ext_path = vim.fn.glob("~/.config/nvim/ext/")
+local home = os.getenv("HOME")
+local jdtls_dir = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+local plugins_dir = jdtls_dir .. "/plugins/"
+local jar_name = vim.fn.system("ls " .. plugins_dir .. " | grep launcher_"):gsub("\n", "")
+local path_to_jar = plugins_dir .. jar_name
+local config_dir = jdtls_dir .. "/config_mac"
+local path_to_lombok = jdtls_dir .. "/lombok.jar"
+
+local root_markers = { ".git", "mvmw", "gradlew", "pom.xml", "build.gradle" }
+local root_dir = require("jdtls.setup").find_root(root_markers)
+if root_dir == "" then
+	print("Could not find root dir")
+	return
+end
+
+local project_name = vim.fn.fnamemodify(root_dir, ":t")
+local workspace_dir = vim.fn.stdpath("data") .. "/site/java/workspace-root/" .. project_name
+os.execute("mkdir -p " .. workspace_dir)
+
+local sdkman_candidates_dir = os.getenv("SDKMAN_CANDIDATES_DIR")
+local jdtls_java_home = sdkman_candidates_dir .. "/java/21.0.2-tem"
+local runtime_home = sdkman_candidates_dir .. "/java/current"
+local java_version = vim.fn.system([[java --version]])
+if java_version == "" or java_version == nil then
+	print("Failed to get java version")
+	return
+end
+
+local sdk_version = string.match(java_version, "(%d+).%d+.%d+")
+local sdk_name = "JavaSE-" .. sdk_version
 
 local bundles = {
 	vim.fn.glob(
-		ext_path
-			.. "com/microsoft/java/com.microsoft.java.debug.plugin/0.52.0/com.microsoft.java.debug.plugin-0.52.0.jar",
+		home .. "/.local/share/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
 		true
 	),
 }
 
-vim.list_extend(bundles, vim.split(vim.fn.glob(ext_path .. "vscode-java-test/server/*.jar", true), "\n"))
+vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.local/share/vscode-java-test/server/*.jar", true), "\n"))
 
 local config = {
-	cmd = { ext_path .. "jdtls/1.35.0/bin/jdtls" },
-	root_dir = vim.fs.dirname(vim.fs.find({ "build.gradle", ".git", "pom.xml" }, { upward = true })[1]),
+	cmd = {
+		jdtls_java_home .. "/bin/java",
+		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
+		"-Dosgi.bundles.defaultStartLevel=4",
+		"-Declipse.product=org.eclipse.jdt.ls.core.product",
+		"-Dlog.level=ALL",
+		"-javaagent:" .. path_to_lombok,
+		"-Xmx1g",
+		"--add-modules=ALL-SYSTEM",
+		"--add-opens",
+		"java.base/java.util=ALL-UNNAMED",
+		"--add-opens",
+		"java.base/java.lang=ALL-UNNAMED",
+		"-jar",
+		path_to_jar,
+		"-configuration",
+		config_dir,
+		"-data",
+		workspace_dir,
+	},
+	root_dir = root_dir,
+	settings = {
+		java = {
+			home = jdtls_java_home,
+			eclipse = {
+				downloadSources = true,
+			},
+			configuration = {
+				updateBuildConfiguration = "interactive",
+				runtimes = {
+					{
+						name = sdk_name,
+						path = runtime_home,
+					},
+				},
+			},
+			maven = {
+				downloadSources = true,
+			},
+			implementationCodeLens = {
+				enabled = true,
+			},
+			referenceCodeLens = {
+				enabled = true,
+			},
+			references = {
+				includeDecompiledSources = true,
+			},
+			format = {
+				settings = {
+					url = vim.fn.stdpath("config") .. "/lang-servers/intellij-java-google-style.xml",
+					profile = "GoogleStyle",
+				},
+			},
+		},
+		signatureHelp = {
+			enabled = true,
+		},
+		completion = {
+			favoriteStaticMembers = {
+				"org.hamcrest.MatcherAssert.assertThat",
+				"org.hamcrest.Matchers.*",
+				"org.junit.jupiter.api.Assertions.*",
+				"java.util.Objects.requireNonNull",
+				"java.util.Objects.requireNonNullElse",
+				"org.mockito.Mockito.*",
+			},
+		},
+		importOrder = {
+			"java",
+			"jakarta",
+			"org",
+			"com",
+			"javax",
+			"",
+		},
+		sources = {
+			organizeImports = {
+				starThreshold = 9999,
+				staticStarThreshold = 9999,
+			},
+		},
+		codeGeneration = {
+			generateComments = true,
+			generateFinalModifierForParameters = true,
+			generateFinalModifierForFields = true,
+			generateFinalModifierForLocalVariables = true,
+		},
+		flags = {
+			allow_incremental_sync = true,
+		},
+	},
 	init_options = {
 		bundles = bundles,
 	},
 }
+
 require("jdtls").start_or_attach(config)
 
 local jdtls = require("jdtls")

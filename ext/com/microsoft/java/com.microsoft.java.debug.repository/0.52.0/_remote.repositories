@@ -1,6 +1,0 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Sun May 05 18:16:59 KST 2024
-com.microsoft.java.debug.repository-0.52.0-p2metadata.xml>=
-com.microsoft.java.debug.repository-0.52.0-p2artifacts.xml>=
-com.microsoft.java.debug.repository-0.52.0.pom>=
-com.microsoft.java.debug.repository-0.52.0.zip>=

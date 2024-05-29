@@ -1,2 +1,0 @@
-#!/bin/bash
-JAVA_HOME="${JAVA_HOME:-/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home}" exec "~/.config/nvim/ext/jdtls/1.35.0/libexec/bin/jdtls"  "$@"
