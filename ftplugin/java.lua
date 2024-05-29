@@ -13,10 +13,14 @@ if root_dir == "" then
 	return
 end
 
+-- 워크스페이스 디렉토리 생성
+-- 프로젝트 디렉토리에서 이름을 추출하여 워크스페이스마다 새로 생성한다.
 local project_name = vim.fn.fnamemodify(root_dir, ":t")
 local workspace_dir = vim.fn.stdpath("data") .. "/site/java/workspace-root/" .. project_name
 os.execute("mkdir -p " .. workspace_dir)
 
+-- SDKMAN을 통해 설치된 자바 버전을 사용
+-- NOTE: SDKMAN이 아닌 다는 버전 관리자를 사용하는 경우 수정이 필요함
 local sdkman_candidates_dir = os.getenv("SDKMAN_CANDIDATES_DIR")
 local jdtls_java_home = sdkman_candidates_dir .. "/java/21.0.2-tem"
 local runtime_home = sdkman_candidates_dir .. "/java/current"
@@ -26,9 +30,13 @@ if java_version == "" or java_version == nil then
 	return
 end
 
+-- 자바 버전을 추출
 local sdk_version = string.match(java_version, "(%d+).%d+.%d+")
 local sdk_name = "JavaSE-" .. sdk_version
 
+-- java-debug
+-- https://github.com/microsoft/java-debug.git
+-- NOTE: ~/.local/share 아래에 설치 후 사용
 local bundles = {
 	vim.fn.glob(
 		home .. "/.local/share/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
@@ -36,6 +44,9 @@ local bundles = {
 	),
 }
 
+-- vscode-java-test
+-- https://github.com/microsoft/vscode-java-test
+-- NOTE: ~/.local/share 아래에 설치 후 사용
 vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.local/share/vscode-java-test/server/*.jar", true), "\n"))
 
 local config = {
