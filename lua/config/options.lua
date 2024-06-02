@@ -26,3 +26,6 @@ opt.scrolloff = 10 -- 스크롤이 시작되는 높이 설정
 
 -- clipboard
 opt.clipboard = "unnamedplus"
+
+-- diagnostics popoup time
+opt.updatetime = 1500
