@@ -1,4 +1,5 @@
 local map_key = require("utils.key-mapper").map_key
+
 return {
 	{
 		"williamboman/mason.nvim",
@@ -27,11 +28,20 @@ return {
 			lspconfig.lua_ls.setup({})
 			lspconfig.tsserver.setup({})
 			lspconfig.gopls.setup({})
+			lspconfig.clangd.setup({})
 			-- lspconfig.jdtls.setup({})
 
 			map_key("K", vim.lsp.buf.hover)
 			map_key("gd", vim.lsp.buf.definition)
 			map_key("<leader>a", vim.lsp.buf.code_action)
+
+			-- Show diagnostics under the cursor when holding position
+			vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
+			vim.api.nvim_create_autocmd({ "CursorHold" }, {
+				pattern = "*",
+				command = "lua OpenDiagnosticIfNoFloat()",
+				group = "lsp_diagnostics_hold",
+			})
 
 			-- debuger keymaps
 			vim.keymap.set("n", "<F5>", function()
