@@ -29,6 +29,8 @@ return {
 			lspconfig.tsserver.setup({})
 			lspconfig.gopls.setup({})
 			lspconfig.clangd.setup({})
+			-- lspconfig.ruby_ls.setup({})
+			lspconfig.solargraph.setup({})
 			-- lspconfig.jdtls.setup({})
 
 			map_key("K", vim.lsp.buf.hover)
