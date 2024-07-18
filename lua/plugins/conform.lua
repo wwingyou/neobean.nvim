@@ -10,11 +10,12 @@ return {
 				typescript = { { "prettierd", "prettier" } },
 				javascriptreact = { { "prettierd", "prettier" } },
 				typescriptreact = { { "prettierd", "prettier" } },
-				ruby = { "rubocop" },
+				ruby = {},
+				cpp = {},
 			},
 			format_on_save = {
 				timeout_ms = 500,
-				lsp_fallback = true,
+				lsp_fallback = false,
 			},
 		})
 	end,

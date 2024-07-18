@@ -35,6 +35,7 @@ return {
 
 			map_key("K", vim.lsp.buf.hover)
 			map_key("gd", vim.lsp.buf.definition)
+			map_key("gi", vim.lsp.buf.implementation)
 			map_key("<leader>a", vim.lsp.buf.code_action)
 
 			-- Show diagnostics under the cursor when holding position
