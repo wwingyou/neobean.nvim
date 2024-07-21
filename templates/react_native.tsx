@@ -1,29 +1,26 @@
-/* This file is written 
+/* This file is written
  *   by: {{_author_}}
  *   at: {{_date_}}
  *   contact: {{_email_}}
  * */
+import { View, Text, StyleSheet } from "react-native";
 
-import { View, Text, StyleSheet } from 'react-native';
-
-export default function {{_file_name_}}() {
+export default function Page() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        {{_cursor_}}
-      </Text>
+      <Text style={styles.title}></Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-  }
+    fontWeight: "bold",
+  },
 });
