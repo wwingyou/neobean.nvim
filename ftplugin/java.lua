@@ -7,7 +7,7 @@ local function get_data_path()
 	if data_path == nil then
 		local home = os.getenv("HOME")
 		if home == nil then
-			data_path = "/usr/local/share"
+			data_path = "/usr/local/share" -- NOTE: This is a random path :)
 		else
 			data_path = vim.fs.joinpath(home, ".local", "share", "nvim")
 		end
@@ -15,12 +15,30 @@ local function get_data_path()
 	return data_path
 end
 
+local function get_cache_path()
+	local cache_path = vim.fn.stdpath("cache")
+	if type(cache_path) == "table" then
+		cache_path = cache_path[0]
+	end
+
+	if cache_path == nil then
+		local home = os.getenv("HOME")
+		if home == nil then
+			cache_path = "/usr/local/cache" -- NOTE: This one either :)
+		else
+			cache_path = vim.fs.joinpath(home, ".cache", "nvim")
+		end
+	end
+	return cache_path
+end
+
+
 local plugins_root = vim.fs.joinpath(get_data_path(), "mason", "packages", "jdtls", "plugins")
 local jdtls_jar = vim.fn.expand(vim.fs.joinpath(plugins_root, "org.eclipse.equinox.launcher_*.jar"))
 local mason_share = vim.fs.joinpath(get_data_path(), "mason", "share", "jdtls")
-local lombok_jar = mason_share .. "/lombok.jar"
-local config_dir = mason_share .. "/config"
-local workspace_root = vim.fn.stdpath("cache") .. "/jdtls/workspaces/common-workspace"
+local lombok_jar = vim.fs.joinpath(mason_share, "lombok.jar")
+local config_dir = vim.fs.joinpath(mason_share, "/config")
+local workspace_root = vim.fs.joinpath(get_cache_path(), "jdtls", "workspaces", "common-workspae")
 
 local root_markers = { ".git", "mvmw", "gradlew", "pom.xml", "build.gradle" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
